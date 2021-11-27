@@ -1,0 +1,7 @@
+# cp /usr/bin/x86_64-generic-linux-gcc .
+# ./bzip2 --verbose --best x86_64-generic-linux-gcc
+# ./bzip2 -d --verbose x86_64-generic-linux-gcc.bz2
+# dd if=/dev/urandom bs=786438 count=50 | base64 > test.txt
+# ./bzip2 --verbose --best test.txt
+# ./bzip2 -d --verbose test.txt.bz2
+# ctest --parallel 1 --verbose --progress || :

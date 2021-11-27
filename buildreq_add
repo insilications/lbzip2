@@ -1,0 +1,36 @@
+# This file contains additional build requirements that did not get
+# picked up automatically. One name per line, no whitespace.
+binutils-dev
+binutils-extras
+bison
+dejagnu
+docbook-utils
+docbook-xml
+doxygen
+elfutils-dev
+expect
+findutils
+flex
+gcc
+gcc-dev
+gcc-dev32
+gcc-doc
+gcc-libgcc32
+gcc-libstdc++32
+gcc-libs-math
+gcc-libubsan
+gcc-locale
+glibc-bench
+glibc-bin
+glibc-dev
+glibc-dev32
+glibc-doc
+glibc-extras
+glibc-libc32
+glibc-lib-avx2
+glibc-locale
+glibc-nscd
+glibc-staticdev
+glibc-utils
+patchelf
+python3-dev
