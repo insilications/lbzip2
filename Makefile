@@ -1,5 +1,5 @@
 PKG_NAME := lbzip2
-URL = https://gitlab.com/bzip2/bzip2.git
+URL = https://github.com/insilications/lbzip2-clr.git
 ARCHIVES = 
 ARCHIVES_GIT = 
 
