@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : lbzip2
 Version  : 2.5
-Release  : 403
+Release  : 404
 URL      : file:///aot/build/clearlinux/packages/lbzip2/lbzip2-v2.5.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/lbzip2/lbzip2-v2.5.tar.gz
 Summary  : No detailed summary available
@@ -14,7 +14,6 @@ License  : GPL-2.0 GPL-3.0
 BuildRequires : binutils-dev
 BuildRequires : binutils-extras
 BuildRequires : bison
-BuildRequires : buildreq-configure
 BuildRequires : dejagnu
 BuildRequires : docbook-utils
 BuildRequires : docbook-xml
@@ -70,7 +69,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1638056555
+export SOURCE_DATE_EPOCH=1638056602
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -221,7 +220,7 @@ make  %{?_smp_mflags}  V=1 VERBOSE=1  V=1 VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1638056555
+export SOURCE_DATE_EPOCH=1638056602
 rm -rf %{buildroot}
 pushd ../build32/
 %make_install32
