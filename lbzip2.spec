@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : lbzip2
 Version  : 2.5
-Release  : 404
+Release  : 414
 URL      : file:///aot/build/clearlinux/packages/lbzip2/lbzip2-v2.5.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/lbzip2/lbzip2-v2.5.tar.gz
 Summary  : No detailed summary available
@@ -43,8 +43,6 @@ BuildRequires : glibc-locale
 BuildRequires : glibc-nscd
 BuildRequires : glibc-staticdev
 BuildRequires : glibc-utils
-BuildRequires : libgcc1
-BuildRequires : libstdc++
 BuildRequires : patchelf
 BuildRequires : python3-dev
 # Suppress stripping binaries
@@ -59,9 +57,6 @@ lbzip2 is a parallel, SMP-based, bzip2-compatible compression utility.
 %prep
 %setup -q -n lbzip2
 cd %{_builddir}/lbzip2
-pushd %{_builddir}
-cp -a %{_builddir}/lbzip2 build32
-popd
 
 %build
 unset http_proxy
@@ -69,7 +64,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1638056602
+export SOURCE_DATE_EPOCH=1638058084
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -193,50 +188,10 @@ export LIBS="${LIBS_USE}"
 make  %{?_smp_mflags}  V=1 VERBOSE=1  V=1 VERBOSE=1
 fi
 
-pushd ../build32/
-export AR=gcc-ar
-export RANLIB=gcc-ranlib
-export NM=gcc-nm
-unset LD_LIBRARY_PATH
-unset LIBRARY_PATH
-unset CPATH
-unset ASFLAGS
-unset CFLAGS
-unset CXXFLAGS
-unset FCFLAGS
-unset FFLAGS
-unset CFFLAGS
-unset LDFLAGS
-export PKG_CONFIG_PATH="/usr/lib32/pkgconfig:/usr/share/pkgconfig"
-export ASFLAGS="--32"
-export CFLAGS="-O2 -ffat-lto-objects -fuse-linker-plugin -pipe -fPIC -march=native -mtune=native -m32 -mstackrealign"
-export CXXFLAGS="-O2 -ffat-lto-objects -fuse-linker-plugin -fvisibility-inlines-hidden -pipe -fPIC -march=native -mtune=native -m32 -mstackrealign"
-export FCFLAGS="-O2 -ffat-lto-objects -fuse-linker-plugin -fvisibility-inlines-hidden -pipe -fPIC -march=native -mtune=native -m32 -mstackrealign"
-export FFLAGS="-O2 -ffat-lto-objects -fuse-linker-plugin -fvisibility-inlines-hidden -pipe -fPIC -march=native -mtune=native -m32 -mstackrealign"
-export CFFLAGS="-O2 -ffat-lto-objects -fuse-linker-plugin -fvisibility-inlines-hidden -pipe -fPIC -march=native -mtune=native -m32 -mstackrealign"
-export LDFLAGS="-O2 -ffat-lto-objects -fuse-linker-plugin -pipe -fPIC -march=native -mtune=native -m32 -mstackrealign"
-%configure   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
-make  %{?_smp_mflags}  V=1 VERBOSE=1  V=1 VERBOSE=1
-popd
 
 %install
-export SOURCE_DATE_EPOCH=1638056602
+export SOURCE_DATE_EPOCH=1638058084
 rm -rf %{buildroot}
-pushd ../build32/
-%make_install32
-if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
-then
-    pushd %{buildroot}/usr/lib32/pkgconfig
-    for i in *.pc ; do ln -s $i 32$i ; done
-    popd
-fi
-if [ -d %{buildroot}/usr/share/pkgconfig ]
-then
-pushd %{buildroot}/usr/share/pkgconfig
-for i in *.pc ; do ln -s $i 32$i ; done
-popd
-fi
-popd
 %make_install
 ## install_append content
 # install -dm 0755 %{buildroot}/usr/lib64/haswell/ || :

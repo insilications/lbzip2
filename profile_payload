@@ -6,5 +6,3 @@
 # ./bzip2 -d --verbose test.txt.bz2
 # ctest --parallel 1 --verbose --progress || :
 make -j1 check V=1 VERBOSE=1
-make -j1 test V=1 VERBOSE=1
-make -j1 tests V=1 VERBOSE=1
