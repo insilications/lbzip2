@@ -1,0 +1,26 @@
+Configure miss: __fseterr
+Configure miss: __fseterr
+Configure miss: compiler option needed when checking for declarations
+Configure miss: compiler option needed when checking for declarations
+Configure miss: crtdefs.h
+Configure miss: crtdefs.h
+Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: signbit compiler built-ins
+Configure miss: signbit compiler built-ins
+Configure miss: signbit macro
+Configure miss: signbit macro
+Configure miss: whether isnan(float) works
+Configure miss: whether isnan(float) works
+Configure miss: whether isnanl works
+Configure miss: whether isnanl works
+Configure miss: whether printf supports infinite 'double' arguments
+Configure miss: whether printf supports infinite 'double' arguments
+Configure miss: whether printf supports infinite 'long double' arguments
+Configure miss: whether printf supports infinite 'long double' arguments
+Configure miss: whether the compiler is clang
+Configure miss: whether the compiler is clang
+Configure miss: whether the compiler produces multi-arch binaries
+Configure miss: whether the compiler produces multi-arch binaries
+Configure miss: working nanosleep
+Configure miss: working nanosleep
