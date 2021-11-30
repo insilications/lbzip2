@@ -5,12 +5,14 @@
 %define keepstatic 1
 Name     : lbzip2
 Version  : 2.5
-Release  : 415
+Release  : 417
 URL      : file:///aot/build/clearlinux/packages/lbzip2/lbzip2-v2.5.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/lbzip2/lbzip2-v2.5.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
+Requires: lbzip2-bin = %{version}-%{release}
+Requires: lbzip2-man = %{version}-%{release}
 BuildRequires : binutils-dev
 BuildRequires : binutils-extras
 BuildRequires : bison
@@ -54,6 +56,22 @@ lbzip2, parallel bzip2 compression utility
 http://lbzip2.org/
 lbzip2 is a parallel, SMP-based, bzip2-compatible compression utility.
 
+%package bin
+Summary: bin components for the lbzip2 package.
+Group: Binaries
+
+%description bin
+bin components for the lbzip2 package.
+
+
+%package man
+Summary: man components for the lbzip2 package.
+Group: Default
+
+%description man
+man components for the lbzip2 package.
+
+
 %prep
 %setup -q -n lbzip2
 cd %{_builddir}/lbzip2
@@ -64,7 +82,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1638058175
+export SOURCE_DATE_EPOCH=1638307289
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -188,7 +206,7 @@ fi
 
 
 %install
-export SOURCE_DATE_EPOCH=1638058175
+export SOURCE_DATE_EPOCH=1638307289
 rm -rf %{buildroot}
 %make_install
 ## install_append content
@@ -198,3 +216,15 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/lbunzip2
+/usr/bin/lbzcat
+/usr/bin/lbzip2
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/lbunzip2.1
+/usr/share/man/man1/lbzcat.1
+/usr/share/man/man1/lbzip2.1
