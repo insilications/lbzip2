@@ -6,6 +6,8 @@ export FFLAGS="${FFLAGS_GENERATE}"
 export FCFLAGS="${FCFLAGS_GENERATE}"
 export LDFLAGS="${LDFLAGS_GENERATE}"
 export LIBS="${LIBS_GENERATE}"
+pushd src/
 tar --create --file=- "/usr/lib64/haswell"/ | ./lbzip2 --best -9 > teste.tar.bz2
 ./lbzip2 --stdout --decompress teste.tar.bz2 | tar -xof -
+popd
 make -j1 check V=1 VERBOSE=1

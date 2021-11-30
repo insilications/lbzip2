@@ -5,14 +5,12 @@
 %define keepstatic 1
 Name     : lbzip2
 Version  : 2.5
-Release  : 417
+Release  : 418
 URL      : file:///aot/build/clearlinux/packages/lbzip2/lbzip2-v2.5.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/lbzip2/lbzip2-v2.5.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
-Requires: lbzip2-bin = %{version}-%{release}
-Requires: lbzip2-man = %{version}-%{release}
 BuildRequires : binutils-dev
 BuildRequires : binutils-extras
 BuildRequires : bison
@@ -56,22 +54,6 @@ lbzip2, parallel bzip2 compression utility
 http://lbzip2.org/
 lbzip2 is a parallel, SMP-based, bzip2-compatible compression utility.
 
-%package bin
-Summary: bin components for the lbzip2 package.
-Group: Binaries
-
-%description bin
-bin components for the lbzip2 package.
-
-
-%package man
-Summary: man components for the lbzip2 package.
-Group: Default
-
-%description man
-man components for the lbzip2 package.
-
-
 %prep
 %setup -q -n lbzip2
 cd %{_builddir}/lbzip2
@@ -82,7 +64,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1638307289
+export SOURCE_DATE_EPOCH=1638307787
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -177,13 +159,16 @@ make  %{?_smp_mflags}  V=1 VERBOSE=1  V=1 VERBOSE=1
 ## profile_payload start
 unset LD_LIBRARY_PATH
 unset LIBRARY_PATH
-# cp /usr/bin/x86_64-generic-linux-gcc .
-# ./bzip2 --verbose --best x86_64-generic-linux-gcc
-# ./bzip2 -d --verbose x86_64-generic-linux-gcc.bz2
-# dd if=/dev/urandom bs=786438 count=50 | base64 > test.txt
-# ./bzip2 --verbose --best test.txt
-# ./bzip2 -d --verbose test.txt.bz2
-# ctest --parallel 1 --verbose --progress || :
+export LD_LIBRARY_PATH="$PWD:/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+export LIBRARY_PATH="$PWD:/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+export CFLAGS="${CFLAGS_GENERATE}"
+export CXXFLAGS="${CXXFLAGS_GENERATE}"
+export FFLAGS="${FFLAGS_GENERATE}"
+export FCFLAGS="${FCFLAGS_GENERATE}"
+export LDFLAGS="${LDFLAGS_GENERATE}"
+export LIBS="${LIBS_GENERATE}"
+tar --create --file=- "/usr/lib64/haswell"/ | ./lbzip2 --best -9 > teste.tar.bz2
+./lbzip2 --stdout --decompress teste.tar.bz2 | tar -xof -
 make -j1 check V=1 VERBOSE=1
 export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
@@ -206,7 +191,7 @@ fi
 
 
 %install
-export SOURCE_DATE_EPOCH=1638307289
+export SOURCE_DATE_EPOCH=1638307787
 rm -rf %{buildroot}
 %make_install
 ## install_append content
@@ -216,15 +201,3 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-
-%files bin
-%defattr(-,root,root,-)
-/usr/bin/lbunzip2
-/usr/bin/lbzcat
-/usr/bin/lbzip2
-
-%files man
-%defattr(0644,root,root,0755)
-/usr/share/man/man1/lbunzip2.1
-/usr/share/man/man1/lbzcat.1
-/usr/share/man/man1/lbzip2.1
